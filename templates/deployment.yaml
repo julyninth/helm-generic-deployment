@@ -39,8 +39,8 @@ spec:
           {{- if .env }}
           env:
             {{- range .env }}
-            - name: {{ .name }}
-              value: {{ .value }}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
             {{- end }}
           {{- end }}
           ports:
