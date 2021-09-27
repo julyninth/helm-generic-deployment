@@ -33,6 +33,7 @@ containers:
 initContainers: []
   # - name: init-myservice
   #   image: busybox
+  #   tag: latest
   #   command: ['sh', '-c', 'sleep 20']
 
 imagePullSecrets: []
