@@ -10,7 +10,7 @@ containers:
       repository: nginx
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: ""
+      tag: latest
     env: {}
       # - name: EXAMPLE
       #   value: example
@@ -30,6 +30,13 @@ containers:
       #   cpu: 100m
       #   memory: 128Mi
 
+initContainers: []
+  # - name: init-myservice
+  #   image:
+  #     repository: busybox
+  #     pullPolicy: IfNotPresent
+  #     tag: latest
+  #   command: ['sh', '-c', 'sleep 20']
 
 imagePullSecrets: []
 nameOverride: ""

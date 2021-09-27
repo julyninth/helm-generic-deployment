@@ -62,6 +62,15 @@ spec:
           resources:
             {{- toYaml .resources | nindent 12 }}
         {{- end }}
+      {{- if .Values.initContainers }}
+      initContainers:
+        {{- range $.Values.initContainers }}
+        - name: {{ .name }}
+          image: "{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: "{{ .image.imagePullPolicy }}"
+          command: {{ .command }}
+        {{- end }}
+      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
