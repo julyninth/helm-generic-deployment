@@ -39,13 +39,13 @@ spec:
           {{- if .env }}
           env:
             {{- range .env }}
-            - name: {{ .name }}
+            - name: {{ .name | quote }}
               {{- with .valueFrom }}
               valueFrom:
-                {{- toYaml . | nindent 16 }}
+                {{- toYaml . | nindent 16 | quote }}
               {{- end }}
               {{- if .value }}
-              value: {{ .value }}
+              value: {{ .value | quote }}
               {{- end }}
             {{- end }}
           {{- end }}
