@@ -22,7 +22,7 @@ containers:
       #   valueFrom:
       #     resourceFieldRef:
       #       containerName: helm-generic-deployment
-      #       resources: requests.cpu
+      #       resource: limits.cpu
       # - name: CONFIGMAP
       #   valueFrom:
       #     configMapKeyRef:

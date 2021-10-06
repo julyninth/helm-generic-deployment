@@ -40,27 +40,9 @@ spec:
           env:
             {{- range .env }}
             - name: {{ .name }}
-              {{- if .valueFrom }}
+              {{- with .valueFrom }}
               valueFrom:
-                {{- if .valueFrom.fieldRef }}
-                fieldRef:
-                  fieldPath: {{ .valueFrom.fieldRef.fieldPath }}
-                {{- end }}
-                {{- if .valueFrom.resourcesFieldRef }}
-                resourceFieldRef:
-                  containerName: {{ .valueFrom.resourceFieldRef.containerName }}
-                  resource: {{ .valueFrom.resourceFieldRef.resource }}
-                {{- end }}
-                {{- if .valueFrom.secretKeyRef }}
-                secretKeyRef:
-                  name: {{ .valueFrom.secretKeyRef.name }}
-                  key: {{ .valueFrom.secretKeyRef.key }}
-                {{- end }}
-                {{- if .valueFrom.configMapKeyRef }}
-                configMapKeyRef:
-                  name: {{ .valueFrom.configMapKeyRef.name }}
-                  key: {{ .valueFrom.configMapKeyRef.key }}
-                {{- end }}
+                {{- toYaml . | nindent 16 }}
               {{- end }}
               {{- if .value }}
               value: {{ .value }}
