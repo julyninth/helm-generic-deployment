@@ -11,9 +11,28 @@ containers:
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: latest
-    env: {}
+    env: []
       # - name: EXAMPLE
       #   value: example
+      # - name: FIELD_REF
+      #   valueFrom:
+      #     fieldRef:
+      #       fieldPath: metadata.name
+      # - name: RESOURCE_REF
+      #   valueFrom:
+      #     resourceFieldRef:
+      #       containerName: helm-generic-deployment
+      #       resources: requests.cpu
+      # - name: CONFIGMAP
+      #   valueFrom:
+      #     configMapKeyRef:
+      #       name: testing
+      #       key: test
+      # - name: SECRET
+      #   valueFrom:
+      #     secretKeyRef:
+      #       name: some-secret
+      #       key: secret
     ports:
       - name: http
         containerPort: 80
