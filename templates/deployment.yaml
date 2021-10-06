@@ -36,6 +36,19 @@ spec:
           */}}
           image: "{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: {{ .image.pullPolicy }}
+          {{- if .volumeMounts }}
+          volumeMounts:
+          {{- range .volumeMounts }}
+            - name: {{ .name }}
+              mountPath: {{ .mountPath }}
+              {{- if .subPath }}
+              subPath: {{ .subPath }}
+              {{- end }}
+              {{- if .readOnly }}
+              readOnly: {{ .readOnly }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
           {{- if .env }}
           env:
             {{- range .env }}
@@ -68,6 +81,10 @@ spec:
           resources:
             {{- toYaml .resources | nindent 12 }}
         {{- end }}
+      {{- if .Values.volumes }}
+      volumes:
+        {{- toYaml .Values.volumes | nindent 8 }}
+      {{- end }}
       {{- if .Values.initContainers }}
       initContainers:
         {{- range $.Values.initContainers }}
