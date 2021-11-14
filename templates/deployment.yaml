@@ -68,16 +68,10 @@ spec:
               containerPort: {{ .containerPort }}
               protocol: {{ .protocol }}
             {{- end }}
-          {{- /*
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          */}}
+          livenessProbe:
+            {{- toYaml .livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .resources | nindent 12 }}
         {{- end }}
