@@ -92,6 +92,19 @@ spec:
           image: "{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: "{{ .image.imagePullPolicy }}"
           command: {{ .command }}
+          {{- if .env }}
+          env:
+            {{- range .env }}
+            - name: {{ .name | quote }}
+              {{- with .valueFrom }}
+              valueFrom:
+                {{- toYaml . | nindent 16 | quote }}
+              {{- end }}
+              {{- if .value }}
+              value: {{ .value | quote }}
+              {{- end }}
+            {{- end }}
+          {{- end }}
         {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
